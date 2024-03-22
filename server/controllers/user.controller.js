@@ -32,6 +32,17 @@ module.exports = {
     catch(error){ res.status(400).json(error) }
   },
 
+  findUser: async (req, res) => {
+    const {_id} = req.params;
+    try{
+      const user = await User.findOne(_id)
+      res.status(200).json(user)
+    }
+    catch(error){
+      res.status(400).json(error)
+    }
+  },
+
   logout: (req, res) => res.clearCookie('token').json({message: "You Logged Out!"}),
 
 };

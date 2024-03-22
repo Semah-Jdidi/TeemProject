@@ -6,4 +6,5 @@ module.exports = router => {
   router.post('/api/register', userController.registerUser);
   router.post('/api/login', userController.loginUser);
   router.post('/api/logout', userController.logout);
+  router.get('/api/findUser/:id', userController.findUser);
 };
