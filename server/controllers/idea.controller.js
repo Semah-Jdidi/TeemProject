@@ -22,7 +22,8 @@ module.exports = {
   },
   findideas: async (req, res) => {
     try{
-      const idea = await Idea.find()
+      
+      const idea = await Idea.find().sort({"likesCount":-1})
       res.status(200).json(idea)
     }
     catch(error){
@@ -72,6 +73,16 @@ module.exports = {
       }
       const user= await User.findOne({_id:req.params.id})
       res.status(200).json({likes,posts,user})
+    }
+    catch(error){
+      res.status(400).json(error)
+    }
+  },
+  deleteOne: async(req,res)=>{
+    try{
+      Idea.deleteOne({_id:req.params.id})
+      .then(confirmation => res.json(confirmation))
+      .catch(err => res.json(err))
     }
     catch(error){
       res.status(400).json(error)

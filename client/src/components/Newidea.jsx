@@ -2,21 +2,21 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
-function Newidea() {
+function Newidea(props) {
 
-    const [content,setContent]=useState()
+  const {ideas,setIdeas}=props
 
     const [errs,setErr]=useState("")
-
+    const [content,setContent]=useState("")
     const  saveidea = (e)=>{
         e.preventDefault();
         axios.post("/api/idea/create",{content},{withCredentials:true})
         .then(res=>{
-          console.log(res)
-          
+          setIdeas([...ideas,res.data]);
         })
         .catch(err=>{setErr(err.response.data.errors)})
     }
+    console.log(ideas)
   return (
     <div>
         <form onSubmit={saveidea} className='flex gap-5'>

@@ -7,18 +7,23 @@ import Ideas from '../components/ideas';
 import { useNavigate} from 'react-router-dom'
 function Home() {
   const [user,setUser]=useState()
+  const [ideas,setIdeas]=useState()
   const navigate = useNavigate()
   useEffect(()=>{
     axios.get("/api/logedin",{withCredentials: true})
     .then((res)=>setUser(res.data))
     .catch((err)=>console.log(err))
    
-},[])
+  },[])
+  const removeidea=(idea_to_remove)=>{
+    setIdeas(ideas.filter(idea=> idea._id !== idea_to_remove))
+  }
   const handellogout=(e)=>{
     e.preventDefault
     axios.post('/api/logout',{},{withCredentials: true})
     navigate('/')
   }
+  
   return (
     <>
       {
@@ -31,9 +36,9 @@ function Home() {
               </button>
             </div>
         <div className='container mx-auto w-96'>
-          <Newidea />
+          <Newidea ideas={ideas} setIdeas={setIdeas} />
         </div>
-          <Ideas userid={user._id}/>
+          <Ideas userid={user._id} ideas={ideas} setIdeas={setIdeas} removeidea={removeidea}/>
       </div>
       :null
 

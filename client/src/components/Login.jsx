@@ -11,7 +11,6 @@ function Login() {
         e.preventDefault();
         axios.post("/api/login",{email,password},{withCredentials: true})
         .then(res=>{
-          console.log(res)
           navigate('/ideas')
         })
         .catch(err=>{setErr(err.response.data.errors)})

@@ -9,6 +9,6 @@ module.exports = router => {
   router.get('/api/userinfo/:id',ideaController.userinfo)
   router.post('/api/idea/create', ideaController.createIdea);
   router.patch('/api/like',ideaController.like)
-  
+  router.delete('/api/deleteidea/:id',ideaController.deleteOne)
 
 };
