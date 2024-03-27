@@ -6,17 +6,16 @@ const IdeaSchema = new mongoose.Schema({
     required: [true, "You Must Add An Idea To Submit!"],
     minLength: [5, "Content Must Be At Least 5 Characters!"]
   },
-
+  name:{
+    type:String
+  },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
 
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
+  likes:[String],
 
   likesCount: {
     type: Number,
